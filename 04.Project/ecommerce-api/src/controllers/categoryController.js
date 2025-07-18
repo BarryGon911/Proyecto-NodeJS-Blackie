@@ -22,14 +22,14 @@ async function getCategoryById(req, res) {
 }
 
 async function createCategory(req, res) {
-  const { name, description, parentCategory, imageUrl } = req.body;
+  const { name, description, parentCategory, imageURL } = req.body;
 
   try {
     const newCategory = new Category({
       name,
       description,
       parentCategory: parentCategory || null,
-      imageUrl: imageUrl || null,
+      imageURL: imageURL || null,
     });
 
     await newCategory.save();
