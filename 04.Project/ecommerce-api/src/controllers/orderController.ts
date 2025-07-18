@@ -110,7 +110,7 @@ async function updateOrder(req, res) {
 
     // Solo permitir actualizar ciertos campos
     const allowedFields = ["status", "paymentStatus", "shippingCost"];
-    const filteredUpdate = {};
+    const filteredUpdate: Record<string, any> = {};
 
     for (const field of allowedFields) {
       if (updateData[field] !== undefined) {
