@@ -1,11 +1,10 @@
-import express from 'express';
-
-import cartRoutes from './cartRoutes.js';
-import categoryRoutes from './categoryRoutes.js';
-import notificationRoutes from './notificationRoutes.js';
-import orderRoutes from './orderRoutes.js';
-import paymentMethodRoutes from './paymentMethodRoutes.js';
-import productRoutes from './productRoutes.js';
+import express from "express";
+import cartRoutes from "./cartRoutes.js";
+import categoryRoutes from "./categoryRoutes.js";
+import notificationRoutes from "./notificationRoutes.js";
+import orderRoutes from "./orderRoutes.js";
+import paymentMethodRoutes from "./paymentMethodRoutes.js";
+import productRoutes from "./productRoutes.js";
 
 const router = express.Router();
 

@@ -1,5 +1,5 @@
 {
-  "name": "ecommerce-api",
+  "name": "ecommerce-api-backend",
   "version": "1.0.0",
   "main": "server.js",
   "type": "module",
@@ -8,7 +8,7 @@
     "start": "node server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "BarryGon911",
   "license": "ISC",
   "description": "",
   "dependencies": {
@@ -16,7 +16,12 @@
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
     "mongoose": "^8.16.4",
-    "nodemon": "^3.1.10",
+    "nodemon": "^3.1.10"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.14",
+    "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }
 }

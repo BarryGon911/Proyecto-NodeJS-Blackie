@@ -1,9 +1,9 @@
-import ShippingAddress from '../models/shippingAddress.js';
+import ShippingAddress from "../models/shippingAddress.js";
 
 async function getShippingAddresses(req, res) {
   try {
     const shippingAddresses = await ShippingAddress.find()
-      .populate('user', 'name email')
+      .populate("user", "name email")
       .sort({ createdAt: -1 });
     res.json(shippingAddresses);
   } catch (error) {
@@ -15,9 +15,9 @@ async function getShippingAddressById(req, res) {
   try {
     const id = req.params.id;
     const shippingAddress = await ShippingAddress.findById(id)
-      .populate('user', 'name email');
+      .populate("user", "name email");
     if (!shippingAddress) {
-      return res.status(404).json({ message: 'Shipping address not found' });
+      return res.status(404).json({ message: "Shipping address not found" });
     }
     res.json(shippingAddress);
   } catch (error) {
@@ -31,7 +31,7 @@ async function getShippingAddressesByUser(req, res) {
     const shippingAddresses = await ShippingAddress.find({ user: userId })
       .sort({ isDefault: -1, createdAt: -1 });
     if (shippingAddresses.length === 0) {
-      return res.status(404).json({ message: 'No shipping addresses found for this user' });
+      return res.status(404).json({ message: "No shipping addresses found for this user" });
     }
     res.json(shippingAddresses);
   } catch (error) {
@@ -56,7 +56,7 @@ async function createShippingAddress(req, res) {
     
     if (!user || !name || !address || !city || !state || !postalCode || !phone) {
       return res.status(400).json({ 
-        error: 'Required fields: user, name, address, city, state, postalCode, phone' 
+        error: "Required fields: user, name, address, city, state, postalCode, phone" 
       });
     }
 
@@ -75,14 +75,14 @@ async function createShippingAddress(req, res) {
       city, 
       state, 
       postalCode, 
-      country: country || 'México', 
+      country: country || "México", 
       phone,
       isDefault: isDefault || false,
-      addressType: addressType || 'home'
+      addressType: addressType || "home"
     });
 
     const populatedAddress = await ShippingAddress.findById(newShippingAddress._id)
-      .populate('user', 'name email');
+      .populate("user", "name email");
     
     res.status(201).json(populatedAddress);
   } catch (error) {
@@ -128,12 +128,12 @@ async function updateShippingAddress(req, res) {
         isDefault,
         addressType
       }, { new: true })
-      .populate('user', 'name email');
+      .populate("user", "name email");
 
     if (updatedShippingAddress) {
       return res.status(200).json(updatedShippingAddress);
     } else {
-      return res.status(404).json({ message: 'Shipping address not found' });
+      return res.status(404).json({ message: "Shipping address not found" });
     }
   } catch (error) {
     res.status(500).send({ error });
@@ -148,7 +148,7 @@ async function deleteShippingAddress(req, res) {
     if (deletedShippingAddress) {
       return res.status(204).send();
     } else {
-      return res.status(404).json({ message: 'Shipping address not found' });
+      return res.status(404).json({ message: "Shipping address not found" });
     }
   } catch (error) {
     res.status(500).json({ error });
@@ -162,7 +162,7 @@ async function setDefaultAddress(req, res) {
     // Obtener la dirección actual
     const currentAddress = await ShippingAddress.findById(id);
     if (!currentAddress) {
-      return res.status(404).json({ message: 'Shipping address not found' });
+      return res.status(404).json({ message: "Shipping address not found" });
     }
 
     // Desmarcar todas las direcciones predeterminadas del usuario
@@ -176,7 +176,7 @@ async function setDefaultAddress(req, res) {
       id,
       { isDefault: true },
       { new: true }
-    ).populate('user', 'name email');
+    ).populate("user", "name email");
 
     res.json(updatedAddress);
   } catch (error) {
