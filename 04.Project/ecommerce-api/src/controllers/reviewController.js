@@ -215,3 +215,14 @@ export const getProductReviewStats = async (req, res) => {
     res.status(500).json({ message: 'Error al obtener las estadísticas', error: error.message });
   }
 };
+
+export {
+  createReview,
+  getAllReviews,
+  getReviewsByProduct, 
+  getReviewsByUser,  
+  getReviewById,
+  updateReview,
+  deleteReview,
+  getProductReviewStats
+}

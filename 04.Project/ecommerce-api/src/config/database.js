@@ -10,8 +10,8 @@ const dbConnection = async () => {
 
     await mongoose.connect(`${dbURI}/${dbName}`, {
       // If you use MongoDB < 8 you have to use this:
-      //useNewUrlParser: true,
-      //useUnifiedTopology: true
+      useNewUrlParser: true,
+      useUnifiedTopology: true
     });
     console.log(`MongoDB is connected`);
   } catch (error) {
