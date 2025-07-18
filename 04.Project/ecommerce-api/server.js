@@ -1,13 +1,16 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import routes from './src/routes/index.js';
-import dbConnection from './src/config/database.js';
-import logger from './src/middlewares/logger.js';
+import express from "express";
+import dotenv from "dotenv";
+import routes from "./src/routes/index.js";
+import connectDB from "./src/config/database.js";
+import logger from "./src/middlewares/logger.js";
+import colors from "colors";
 
 dotenv.config();
 
+const port = process.env.PORT || 4000;// Default port if not specified by Hosting Provider when deploying the application
+
 const app = express();
-dbConnection();
+connectDB();
 app.use(express.json());
 app.use(logger);
 
@@ -16,6 +19,6 @@ app.get("/", (req, res) => {
 });
 app.use('/api', routes);
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server running on http://localhost:${process.env.PORT}`);
+app.listen(port, () => {
+  console.log(colors.bgMagenta.magenta.italic.bold(`NodeJS server is running on http://localhost:${port}`));
 });

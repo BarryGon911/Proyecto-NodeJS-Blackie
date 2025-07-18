@@ -1,23 +1,20 @@
 import mongoose from "mongoose";
+import colors from "colors";
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-const dbConnection = async () => {
+export const connectDB = async () => {
   try {
-    const dbURI = process.env.MONGODB_URI;
-    const dbName = process.env.MONGODB_DB;
-
-    await mongoose.connect(`${dbURI}/${dbName}`, {
-      // If you use MongoDB < 8 you have to use this:
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
-    console.log(`MongoDB is connected`);
-  } catch (error) {
-    console.log(error);
-    process.exit(1);
+    const { connection } = await mongoose.connect(process.env.MONGODB_URI);
+    const url = `${connection.host}:${connection.port}/${connection.name}`;
+    console.log(colors.bgBlue.cyan.bold(`MongoDB connected successfully on ${url}`));
+    return "Ok"
   }
-};
+  catch (error) {
+        console.error(colors.bgRed.bold.white.bold(error.message));
+        process.exit(1);// Exit the process with Failure
+    }
+}
 
-export default dbConnection;
+export default connectDB;
